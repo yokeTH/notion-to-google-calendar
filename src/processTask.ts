@@ -32,9 +32,9 @@ export async function processTasks(env: Env) {
                         const lastEditedTime = new Date(element.last_edited_time);
                         const location = element.properties.Location.rich_text[0]?.text.content;
 
-                        // if (Math.abs(lastEditedTime.getTime() - lastUpdateAt.getTime()) < 100) {
-                        //     return;
-                        // }
+                        if (Math.abs(lastEditedTime.getTime() - lastUpdateAt.getTime()) < 100) {
+                            return;
+                        }
 
                         if (!startDate) {
                             return;
@@ -64,7 +64,7 @@ export async function processTasks(env: Env) {
                                 const taskDate = new Date(startDate);
                                 const today = new Date();
                                 today.setHours(0, 0, 0, 0);
-                                
+
                                 if (isDone) {
                                     // Done task: Use original dates
                                     event = {
